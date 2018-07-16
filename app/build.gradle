@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+// 添加插件
+apply plugin: 'com.mob.sdk'
+def config = rootProject.ext.android //配置
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "foxidcw.android.com.foxstore"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+                useLibrary 'org.apache.http.legacy'
+
+        //信鸽推送配置
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+            manifestPlaceholders = [
+                    XG_ACCESS_ID:"2100298336",
+                    XG_ACCESS_KEY:"AEY3C258N3PT",
+            ]
+        }
+
+
+    }
+
+    signingConfigs {
+        sign {
+            //TODO 发布版必须将项目内的keystore文件删除并将值改为外部引用值
+            /**
+             *  storeFile file('引用外部资源文件')
+             *  storePassword '读取外部文件值'
+             *  keyAlias '读取外部文件值'
+             *  keyPassword '读取外部文件值'
+             * */
+            storeFile file("idcw.jks")
+            storePassword "123456"
+            keyAlias "idcwallet"
+            keyPassword "123456"
+            v2SigningEnabled false
+        }
+    }
+
+
+    buildTypes {//调用签名的方法
+        debug {
+            buildConfigField "Boolean", "DebugLog", "true"
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.sign
+        }
+
+        release {
+            signingConfig signingConfigs.sign
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '26.0.2'
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'cn.bmob.android:http-legacy:1.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    implementation project(':common')
+
+
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.0.2'
+            }
+        }
+
+    }
+
+
+
+
+}
+
+
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "26a1accc47ec7"
+    appSecret "432e3dc2c7176f0c2d68129c17e9ae1b"
+
+    SMSSDK {}
+}
+
+
+//bmob 依赖的坑
+
+task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+    destinationDir file("$projectDir/libs")
+    baseName "Native_Libs2"
+    extension "jar"
+    from fileTree(dir: "libs", include: "*****///*//*.so")
+    into "lib"
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
+}
+
+
+

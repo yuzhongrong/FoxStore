@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+  <RelativeLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp50">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/dp20"
+        android:layout_height="@dimen/dp20"
+        android:src="@drawable/ic_back"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="发布"
+        android:gravity="center"
+        android:textSize="@dimen/dp16"
+        android:textStyle="bold"
+        android:textColor="@color/color_333333"
+        />
+
+
+  </RelativeLayout>
+
+
+  <RelativeLayout
+      android:id="@+id/tip"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp20"
+      android:layout_below="@+id/back"
+      android:background="#f1eadb"
+
+      >
+    <ImageView
+        android:id="@+id/tip_left"
+        android:layout_width="@dimen/dp40"
+        android:layout_height="@dimen/dp40"
+        android:src="@mipmap/tip_waring"
+        android:layout_alignParentLeft="true"
+
+
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="发布刷单前请先去多多授权。谢谢！"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/dp11"
+        android:textColor="#000000"
+        android:layout_toRightOf="@+id/tip_left"
+
+        />
+
+
+  </RelativeLayout>
+
+
+  <RelativeLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/dp10"
+      android:gravity="center_vertical"
+      android:layout_marginTop="@dimen/dp14"
+      >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/headimg"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
+        android:src="@drawable/pic_small"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/dp10"
+        android:visibility="gone"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/headimg"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp10"
+        >
+
+      <TextView
+          android:id="@+id/goods_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textStyle="bold"
+          android:textColor="@color/color_333333"
+          android:textColorHint="@color/color_333333"
+          android:maxLines="1"
+          android:ellipsize="end"
+          android:ems="15"
+          android:hint="商品的标题显示"
+          />
+
+
+
+
+      <TextView
+          android:id="@+id/storename"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:hint="店铺名"
+          android:textStyle="bold"
+          android:textColor="@color/color_999999"
+          android:layout_below="@+id/goods_name"
+          android:layout_marginTop="@dimen/dp10"
+          android:maxLines="1"
+          android:maxEms="10"
+          android:ellipsize="end"
+
+          />
+
+      <TextView
+          android:id="@+id/simpleprice"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textStyle="bold"
+          android:textColor="@color/color_999999"
+          android:layout_below="@+id/goods_name"
+          android:layout_marginTop="@dimen/dp10"
+          android:layout_toRightOf="@+id/storename"
+          android:hint="团价"
+          android:layout_marginLeft="@dimen/dp14"
+
+          />
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/mainimg"
+        android:layout_width="@dimen/dp60"
+        android:layout_height="@dimen/dp60"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_add"
+
+
+        />
+
+
+  </RelativeLayout>
+
+
+  <com.flyco.tablayout.SegmentTabLayout
+      android:id="@+id/tl_1"
+      android:layout_width="wrap_content"
+      android:layout_height="32dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="10dp"
+      tl:tl_bar_color="#ffffff"
+      tl:tl_indicator_color="#2a82e4"
+      tl:tl_indicator_corner_radius="8dp"
+      tl:tl_tab_padding="20dp"
+      tl:tl_indicator_anim_enable="true"
+      />
+
+
+  <com.flyco.tablayout.SegmentTabLayout
+
+      android:id="@+id/count"
+      android:layout_width="@dimen/dp250"
+      android:layout_height="36dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="10dp"
+      android:paddingLeft="25dp"
+      android:paddingRight="25dp"
+      tl:tl_bar_color="#ffffff"
+      tl:tl_indicator_anim_enable="true"
+      tl:tl_indicator_color="#2a82e4"
+      tl:tl_indicator_margin_bottom="2dp"
+      tl:tl_indicator_margin_left="2dp"
+      tl:tl_indicator_margin_right="2dp"
+      tl:tl_indicator_margin_top="2dp"
+      tl:tl_indicator_corner_radius="8dp"
+      tl:tl_textBold="SELECT"/>
+
+
+  <foxstore.android.com.foxstore.widgets.CusEditText
+      android:id="@+id/edit1"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp50"
+      android:layout_marginTop="@dimen/dp35"
+      android:layout_marginLeft="@dimen/dp14"
+      android:layout_marginRight="@dimen/dp14"
+      android:background="@null"
+      android:hint="@string/keyword"
+      android:textSize="@dimen/dp14"
+      android:drawableLeft="@mipmap/icon_simple_price"
+      android:drawablePadding="@dimen/dp5"
+      android:textCursorDrawable="@null"
+
+
+
+      />
+
+  <foxstore.android.com.foxstore.widgets.CusEditText
+      android:id="@+id/edit2"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp50"
+      android:layout_marginTop="@dimen/dp5"
+      android:layout_marginLeft="@dimen/dp14"
+      android:layout_marginRight="@dimen/dp14"
+      android:background="@null"
+      android:hint="@string/dianpu"
+      android:textSize="@dimen/dp14"
+      android:drawableLeft="@mipmap/icon_dp"
+      android:drawablePadding="@dimen/dp5"
+      android:textCursorDrawable="@null"
+      android:visibility="gone"
+
+
+
+
+
+      />
+  <foxstore.android.com.foxstore.widgets.CusEditText
+      android:id="@+id/edit3"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp50"
+      android:layout_marginTop="@dimen/dp5"
+      android:layout_marginLeft="@dimen/dp14"
+      android:layout_marginRight="@dimen/dp14"
+      android:hint="@string/simple_price"
+      android:background="@null"
+      android:textSize="@dimen/dp14"
+      android:drawableLeft="@mipmap/icon_simple_price1"
+      android:drawablePadding="@dimen/dp5"
+      android:textCursorDrawable="@null"
+      android:inputType="numberDecimal"
+      android:visibility="gone"
+      />
+
+
+  <Button
+      android:id="@+id/start"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp50"
+      android:layout_marginLeft="@dimen/dp14"
+      android:layout_marginRight="@dimen/dp14"
+      android:background="@drawable/seletor_shap_round_2c97de"
+      android:text="发布刷单"
+      android:textSize="@dimen/dp20"
+      android:textColor="@android:color/white"
+      android:layout_gravity="end"
+      android:gravity="center"
+      android:layout_marginTop="@dimen/dp50"
+
+
+      />
+
+
+</LinearLayout>
+

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dp5"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp5"
+        android:gravity="center_vertical"
+
+        >
+        <com.cjwsc.idcm.base.ui.view.roundimge.CircleImageView
+            android:id="@+id/headimg"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:layout_marginLeft="@dimen/dp20"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/headimg"
+            android:layout_marginLeft="@dimen/dp5"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="听风说币"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6小时前"
+                android:textColor="@color/c_FF999999"
+                android:layout_marginTop="@dimen/dp10"
+                android:textSize="@dimen/dp12"
+
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16"
+            android:text="关注"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/dp20"
+
+            />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp25"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp20"
+            android:textSize="@dimen/dp15"
+            android:textColor="@color/color_2a2a33"
+            android:text="币乎第100篇：深耕翻译的原因以及收获"
+            android:layout_marginRight="@dimen/dp20"
+            android:layout_marginLeft="@dimen/dp20"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp130"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp25"
+            android:padding="@dimen/dp2"
+            android:src="@drawable/pic_large"
+            android:scaleType="fitXY"
+            />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp30"
+            android:padding="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp10"
+
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2265.32"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/dp30"
+                android:drawableLeft="@drawable/money"
+                android:drawablePadding="@dimen/dp4"
+                />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1598"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/good"
+                android:drawablePadding="@dimen/dp4"
+
+
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="151"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp30"
+                android:drawableLeft="@drawable/comment1"
+                android:drawablePadding="@dimen/dp4"
+
+
+                />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

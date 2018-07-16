@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/top"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp50">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/dp20"
+        android:layout_height="@dimen/dp20"
+        android:src="@drawable/ic_back"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+
+
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="注册新用户"
+        android:gravity="center"
+        android:textSize="@dimen/dp16"
+        android:textColor="@color/color_333333"
+        />
+
+
+</RelativeLayout>

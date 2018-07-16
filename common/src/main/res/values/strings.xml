@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">common</string>
+    <string name="str_head_pulldown">下拉可以刷新</string>
+    <string name="str_header_refreshing">正在刷新...</string>
+    <string name="str_head_release">释放立即刷新</string>
+    <string name="str_header_finish">刷新完成</string>
+    <string name="str_header_failed">刷新失败</string>
+    <string name="str_header_all_finish">全部加载完成</string>
+    <string name="footer_loading">正在加载...</string>
+    <string name="footer_finish">加载完成</string>
+    <string name="tv_again_click_out">再按一次退出</string>
+</resources>
