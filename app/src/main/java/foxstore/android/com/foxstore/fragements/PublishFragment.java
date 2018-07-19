@@ -1,5 +1,6 @@
 package foxstore.android.com.foxstore.fragements;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,8 +32,10 @@ import org.simple.eventbus.Subscriber;
 import java.util.List;
 
 import foxstore.android.com.common.fragments.BaseFoxStoreFragment;
+import foxstore.android.com.common.kes.ActivityKeys;
 import foxstore.android.com.common.kes.EventKes;
 import foxstore.android.com.foxstore.R;
+import foxstore.android.com.foxstore.activitys.InviteActivity;
 import foxstore.android.com.foxstore.callback.QueryCallback;
 import foxstore.android.com.foxstore.iprovider.DuoDuoAuth2ProviderServices;
 import foxstore.android.com.foxstore.model.bean.Order;
@@ -113,7 +116,9 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
 //
 //                                startActivity(intent);
 
-                            //    startActivity(new Intent(getActivity(),LoginActivity.class));
+                              //  startActivity(new Intent(getActivity(),InviteActivity.class));
+
+                                ARouter.getInstance().build(ActivityKeys.ACTIVITY_INVITE).withString("image_url",item.getUrl()).navigation(getActivity());
                             }
                     );
 

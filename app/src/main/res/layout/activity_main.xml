@@ -22,6 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp48"
         app:containerId="@+id/main_container"
-        app:navigateTabSelectedTextColor="#2E406B"
+        app:navigateTabSelectedTextColor="#2a82e4"
         app:navigateTabTextColor="#ACB6C7" />
 </LinearLayout>

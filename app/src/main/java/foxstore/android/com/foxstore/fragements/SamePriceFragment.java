@@ -49,7 +49,7 @@ public class SamePriceFragment extends BaseFoxStoreFragment {
     @Override
     protected void onInitView(Bundle bundle) {
         mRecycleview = (RecyclerView) $(R.id.recycleview);
-        commonAdapter = new CommonAdapter<article>(R.layout.item_subscribe_weixin_layout) {
+        commonAdapter = new CommonAdapter<article>(R.layout.item_home_layout) {
             @Override
             public void commonconvert(BaseViewHolder helper, article item) {
 

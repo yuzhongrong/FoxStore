@@ -123,8 +123,8 @@ public class RxTimerUtil {
     /**
      * 开始计时
      */
-    public static void startTime(BaseActivity activity, final TextView tvGetCode) {
-        final long codeTimes = 60;
+    public static void startTime(BaseActivity activity, final TextView tvGetCode,String content,long secendcount, final IRxNext next) {
+        final long codeTimes = secendcount;
         Observable.interval(0, 1, TimeUnit.SECONDS)
                 .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .take(codeTimes - 1)
@@ -149,7 +149,8 @@ public class RxTimerUtil {
 
                     @Override
                     public void onNext(Long value) {
-                        tvGetCode.setText("剩余" + value + "秒");
+                        tvGetCode.setText(content+value+"s" );
+
                     }
 
                     @Override
@@ -160,7 +161,7 @@ public class RxTimerUtil {
                     @Override
                     public void onComplete() {
                         tvGetCode.setEnabled(true);
-                        tvGetCode.setText("获取验证码");
+                        if(next!=null)next.doNext(0);//倒计时到0
                     }
                 });
     }

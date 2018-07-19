@@ -118,8 +118,9 @@ dependencies {
     compile librarys.luban
     compile librarys.roundedImageView
     compile librarys.badgeview
-    compile librarys.agentweb
-   // compile project(':FoxArouter')
+    implementation librarys.niceimageview
+    implementation librarys.fab
+    // compile project(':FoxArouter')
 
 }
 

@@ -70,6 +70,12 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".activitys.InviteActivity"
+            android:screenOrientation="portrait"
+            />
+
+
+
 
         <activity android:name=".activitys.LoginActivity"
             android:screenOrientation="portrait"

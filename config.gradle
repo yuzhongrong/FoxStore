@@ -110,7 +110,8 @@ ext {
             luban                        : 'top.zibin:Luban:1.1.3',
             roundedImageView             : 'com.makeramen:roundedimageview:2.3.0',
             badgeview                    : 'q.rorbin:badgeview:1.1.3',
-            agentweb                      :'com.just.agentweb:agentweb:4.0.2',
+            niceimageview                :'com.github.Othershe:NiceImageView:1.0.0',
+            fab                           : 'com.github.clans:fab:1.6.4'
 
     ]
 }

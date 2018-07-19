@@ -61,7 +61,12 @@ public class RegistActivity extends BaseFoxStoreActivity {
                     CreateAccount(phone.getText().toString(),pwd.getText().toString());
                 }else if (msg.arg1 == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     //获取验证码成功后开始60s倒计时
-                    RxTimerUtil.startTime(RegistActivity.this,sendcode);
+                    RxTimerUtil.startTime(RegistActivity.this, sendcode, "剩余", 60, new RxTimerUtil.IRxNext() {
+                        @Override
+                        public void doNext(long number) {
+                            sendcode.setText("获取验证码");
+                        }
+                    });
                 }else if (msg.arg1 ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
                     //返回支持发送验证码的国家列表
                 }

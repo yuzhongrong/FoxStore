@@ -6,5 +6,7 @@ public class ActivityKeys {
     public static final String ACTIVITY_REGISTER= "/app/activitys/RegistActivity"; //注册页
 
     public static final String ACTIVITY_AUTHWEB= "/app/activitys/WebViewActivity"; //注册页
+    public static final String ACTIVITY_INVITE= "/app/activitys/InviteActivity"; //邀请页
+
 
 }

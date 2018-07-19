@@ -34,7 +34,8 @@ public class SoundPlayUtils {
 
         //模拟数据
         mSoundPlayer.load(mContext, R.raw.general, 1);// 1
-
+        mSoundPlayer.load(mContext,R.raw.talkroom_begin,2);//2
+        mSoundPlayer.load(mContext,R.raw.playend,3);//2
 
         return soundPlayUtils;
     }

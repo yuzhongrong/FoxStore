@@ -356,11 +356,18 @@ public class StartPublishActivity extends BaseFoxStoreActivity implements View.O
                         //获取到商品详情
                         if(goodsDetailBean!=null){
                             detailBean=goodsDetailBean;
-                            GlideUtil.loadImageViewWithTransform(StartPublishActivity.this,goodsDetailBean
-                                            .getGoods_detail_get_response()
-                                            .getHd_thumb_url(),
-                                    new RoundedCornersTransformation(10,0)
-                                    ,mainimg);
+                            GoodsDetailBean.GoodsDetailGetResponseBean bean=goodsDetailBean
+                                    .getGoods_detail_get_response();
+                            //处理错乱数据
+                                if(bean==null)return;
+                               String url= bean .getHd_thumb_url();
+                                if( TextUtils.isEmpty(url))return;
+                            //end
+                                GlideUtil.loadImageViewWithTransform(StartPublishActivity.this,url,
+                                        new RoundedCornersTransformation(10,0)
+                                        ,mainimg);
+
+
 
                             goods_name.setText(StringUtils.handlerNull(goodsDetailBean.getGoods_detail_get_response().getGoods_name()));
                             int multyprice=goodsDetailBean.getGoods_detail_get_response().getSku_list().get(0).getMulti_price();

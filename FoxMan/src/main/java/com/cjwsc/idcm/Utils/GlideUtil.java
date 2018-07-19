@@ -26,6 +26,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.cjwsc.idcm.R;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -80,10 +81,20 @@ public final class GlideUtil extends AppGlideModule {
     }
 
 
-    //包含转换器的加载,如圆角
     public static void loadImageViewWithTransform(Context mContext, String path, RoundedCornersTransformation transformation, ImageView mImageView) {
         GlideApp.with(mContext).load(path).transforms(transformation).into(mImageView);
     }
+
+    //包含转换器的加载,如圆角
+    public static void loadImageViewWithTransform(Context mContext, Integer resid, RoundedCornersTransformation transformation, ImageView mImageView) {
+        GlideApp.with(mContext).load(resid).transforms(transformation).into(mImageView);
+    }
+
+    //包含转换器的加载,如圆角
+    public static void loadImageViewWithTransform(Context mContext, int path, BlurTransformation transformation, ImageView mImageView) {
+        GlideApp.with(mContext).load(path).transforms(transformation).into(mImageView);
+    }
+
 
     //加载圆形图片
     public static void loadCircleImage(Context context, String url, ImageView imageview) {
