@@ -7,6 +7,8 @@
     android:padding="@dimen/dp10">
 
 
+
+
     <TextView
         android:id="@+id/keyword"
         android:layout_width="wrap_content"
@@ -20,7 +22,7 @@
         android:layout_marginLeft="@dimen/dp5"
         android:singleLine="true"
         android:ellipsize="end"
-        android:ems="15"
+        android:maxEms="15"
 
         />
 
@@ -38,7 +40,23 @@
         android:layout_below="@+id/keyword"
         android:singleLine="true"
         android:ellipsize="end"
-        android:ems="15"
+        android:maxEms="11"
+
+
+        />
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="互刷中"
+        android:textColor="@color/c_D72727"
+        android:textSize="@dimen/dp12"
+        android:layout_marginLeft="@dimen/dp5"
+        android:padding="@dimen/dp5"
+        android:layout_toLeftOf="@+id/mainimg"
+        android:layout_below="@+id/keyword"
+        android:layout_marginRight="@dimen/dp37"
 
         />
 

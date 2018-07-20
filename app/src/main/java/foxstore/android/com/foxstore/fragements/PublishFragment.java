@@ -1,6 +1,5 @@
 package foxstore.android.com.foxstore.fragements;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,19 +25,27 @@ import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
+import com.zhl.cbdialog.CBDialogBuilder;
+
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
+import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.fragments.BaseFoxStoreFragment;
 import foxstore.android.com.common.kes.ActivityKeys;
 import foxstore.android.com.common.kes.EventKes;
+import foxstore.android.com.common.kes.IntentKeys;
 import foxstore.android.com.foxstore.R;
-import foxstore.android.com.foxstore.activitys.InviteActivity;
+import foxstore.android.com.foxstore.bean.User;
 import foxstore.android.com.foxstore.callback.QueryCallback;
 import foxstore.android.com.foxstore.iprovider.DuoDuoAuth2ProviderServices;
-import foxstore.android.com.foxstore.model.bean.Order;
+import foxstore.android.com.foxstore.bean.Order;
 import foxstore.android.com.foxstore.utils.BmobUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -90,6 +97,7 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
                 public void commonconvert(BaseViewHolder helper, Order item) {
                     ((TextView)helper.getView(R.id.keyword)).setText(StringUtils.handlerNull(item.getKeyword()));
                     ((TextView)helper.getView(R.id.dianpu)).setText(StringUtils.handlerNull(item.getStorename()));
+                    TextView state= ((TextView)helper.getView(R.id.state));
                     String price="￥"+StringUtils.handlerNull(item.getPrice())+" x"+item.getCount();
                     LogUtil.d("------price----->"+price);
                     ((TextView)helper.getView(R.id.price)).setText(price);
@@ -106,7 +114,13 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
                         tv.setText("参");
                         tv.setBackgroundResource(R.drawable.shape_item_home_red);
                     }
+                    //设置状态
 
+                   if( item.getState()==null){
+                       state.setVisibility(View.GONE);
+                   }else{
+                       state .setVisibility(View.VISIBLE);
+                   }
 
                     helper.getConvertView().setOnClickListener(
                             v -> {
@@ -118,7 +132,37 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
 
                               //  startActivity(new Intent(getActivity(),InviteActivity.class));
 
-                                ARouter.getInstance().build(ActivityKeys.ACTIVITY_INVITE).withString("image_url",item.getUrl()).navigation(getActivity());
+                                //请求前先获取刷单状态判断其是否正在刷单
+                                if(item.getState()==null){//null是空闲状态
+
+                                    //查找Person表里面id为6b6c11c537的数据
+                                    BmobQuery<User> bmobQuery = new BmobQuery<User>();
+                                    ((BaseFoxStoreActivity)getActivity()).showDialog();
+                                    bmobQuery.getObject(item.getUserid(), new QueryListener<User>() {
+                                        @Override
+                                        public void done(User object,BmobException e) {
+                                            ((BaseFoxStoreActivity)getActivity()).dismissDialog();
+                                            if(e==null){
+                                                ARouter.getInstance().build(ActivityKeys.ACTIVITY_INVITE)
+                                                        .withString(IntentKeys.DIANPU,item.getStorename())
+                                                          .withString(IntentKeys.HEADIMG,object.getHeadimg())
+                                                        .navigation(getActivity());
+                                            }else{
+                                                ToastUtil.show("查询用户信息失败：" );
+
+                                            }
+                                        }
+                                    });
+
+
+
+
+                                }else if(item.getState().equals("1")){//忙碌状态
+                                    popTip();
+                                }
+
+
+
                             }
                     );
 
@@ -129,7 +173,26 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
 
 
 
-        };
+        }
+
+    private void popTip() {
+
+        new CBDialogBuilder(getActivity())
+                .setTouchOutSideCancelable(true)
+                .showCancelButton(true)
+                .setCustomIcon(R.drawable.wushou)
+                .setTitleTextColor(R.color.c_2E7FD0)
+                .showCancelButton(false)
+                .setTitle("刷单中...")
+                .setMessage("刷单中，请稍后再尝试！！")
+                .setDialogAnimation(CBDialogBuilder.DIALOG_ANIM_SLID_TOP)
+                .setConfirmButtonText("知道了")
+                .setConfirmButtonTextColor(R.color.c_2a82e4)
+                .create().show();
+
+    }
+
+    ;
 
 
 

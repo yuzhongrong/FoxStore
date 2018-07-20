@@ -1,4 +1,4 @@
-package foxstore.android.com.foxstore.model.bean;
+package foxstore.android.com.foxstore.bean;
 
 import cn.bmob.v3.BmobObject;
 
@@ -14,6 +14,10 @@ public class Order extends BmobObject {
     String keyword;//关键词
     String storename;//店铺名称
     String price;//单价
+
+
+
+    private String state;//刷单状态 null:空闲，1：刷单
     private String goods_id;
 
     public Order(String userid,String goods_id, String url, boolean iscan, int count, String keyword, String storename, String price) {
@@ -81,5 +85,12 @@ public class Order extends BmobObject {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

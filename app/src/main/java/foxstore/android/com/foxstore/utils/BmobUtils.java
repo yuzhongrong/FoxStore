@@ -1,40 +1,29 @@
 package foxstore.android.com.foxstore.utils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.cjwsc.idcm.Utils.RetrofitUtil;
 import com.cjwsc.idcm.Utils.ToastUtil;
-import com.cjwsc.idcm.api.FoxManHttpApi;
 import com.cjwsc.idcm.base.BaseActivity;
 import com.cjwsc.idcm.base.application.BaseApplication;
 import com.cjwsc.idcm.net.callback.RxSubscriber;
 import com.cjwsc.idcm.net.exception.ResponseThrowable;
-import com.cjwsc.idcm.net.http.HttpUtils;
-import com.cjwsc.idcm.net.response.HttpResponse;
-import com.cjwsc.idcm.net.transformer.DefaultTransformer;
-import com.trello.rxlifecycle2.RxLifecycle;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
+import foxstore.android.com.foxstore.bean.User;
 import foxstore.android.com.foxstore.callback.QueryCallback;
-import foxstore.android.com.foxstore.model.bean.MainImg;
+import foxstore.android.com.foxstore.bean.MainImg;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -284,10 +273,10 @@ public class BmobUtils {
 
         }
         //如果是登录或者注册
-        if(obj instanceof BmobUser){
-            ((BmobUser)obj).signUp(new SaveListener<BmobUser>() {
+        if(obj instanceof User){
+            ((User)obj).signUp(new SaveListener<User>() {
                 @Override
-                public void done(BmobUser user, BmobException e) {
+                public void done(User user, BmobException e) {
                     ((BaseFoxStoreActivity)context).dismissDialog();
                     if(e ==null){
 

@@ -14,10 +14,13 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cjwsc.idcm.Utils.ACacheUtil;
+import com.cjwsc.idcm.Utils.LogUtil;
 import com.cjwsc.idcm.Utils.PhoneNumberUtil;
 import com.cjwsc.idcm.Utils.ToastUtil;
 import com.cjwsc.idcm.base.BaseView;
-import cn.bmob.v3.BmobUser;
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushManager;
+
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.smssdk.EventHandler;
@@ -25,6 +28,7 @@ import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.kes.AcacheKeys;
 import foxstore.android.com.common.kes.ActivityKeys;
 import foxstore.android.com.foxstore.R;
+import foxstore.android.com.foxstore.bean.User;
 import foxstore.android.com.foxstore.widgets.CusEditText;
 @Route(path = ActivityKeys.ACTIVITY_LOGIN,name = "登录页面")
 public class LoginActivity extends BaseFoxStoreActivity {
@@ -104,16 +108,29 @@ public class LoginActivity extends BaseFoxStoreActivity {
     private void LoginAccount(String phone,String pwd){
         //调用bmob 创建一个帐号
         showDialog();
-        BmobUser user=new BmobUser();
+       User user=new User();
         user.setUsername(phone);
         user.setPassword(pwd);
-         user.login(new SaveListener<BmobUser>() {
+         user.login(new SaveListener<User>() {
 
              @Override
-             public void done(BmobUser user, BmobException e) {
+             public void done(User user, BmobException e) {
                  if(e ==null){
                       ToastUtil.show("登录成功");
                       ACacheUtil.get(LoginActivity.this).put(AcacheKeys.LOGINBEAN,user);
+                     XGPushManager.registerPush(LoginActivity.this, user.getUsername(), new XGIOperateCallback() {
+                         @Override
+                         public void onSuccess(Object o, int i) {
+                             LogUtil.d("------信鸽帐号绑定成功------->"+o.toString());
+                         }
+
+                         @Override
+                         public void onFail(Object o, int i, String s) {
+                             LogUtil.d("------信鸽帐号绑定失败------->"+s);
+
+                         }
+                     });
+
                       finish();
                      ARouter.getInstance().build( ActivityKeys.ACTIVITY_MAIN).navigation();//进入主页
 

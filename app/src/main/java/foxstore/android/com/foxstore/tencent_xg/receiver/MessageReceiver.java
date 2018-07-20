@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cjwsc.idcm.Utils.GsonUtil;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
@@ -23,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import foxstore.android.com.common.kes.EventKes;
-import foxstore.android.com.foxstore.model.bean.Order;
+import foxstore.android.com.foxstore.bean.Order;
 import foxstore.android.com.foxstore.tencent_xg.bean.Message;
 import foxstore.android.com.foxstore.tencent_xg.bean.XGNotification;
 import foxstore.android.com.foxstore.tencent_xg.common.NotificationService;

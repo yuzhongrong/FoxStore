@@ -1,4 +1,4 @@
-package foxstore.android.com.foxstore.model.bean;
+package foxstore.android.com.foxstore.bean;
 
 import cn.bmob.v3.BmobObject;
 

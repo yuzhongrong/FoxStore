@@ -11,34 +11,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.cjwsc.idcm.Utils.JsonUtil;
 import com.cjwsc.idcm.Utils.LogUtil;
 import com.cjwsc.idcm.Utils.PhoneNumberUtil;
 import com.cjwsc.idcm.Utils.RxTimerUtil;
 import com.cjwsc.idcm.Utils.ToastUtil;
-import com.cjwsc.idcm.base.BaseActivity;
 import com.cjwsc.idcm.base.BaseView;
 
-import java.util.concurrent.TimeUnit;
-
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobUser;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.kes.ActivityKeys;
-import foxstore.android.com.common.widgets.CommonTopLayout;
 import foxstore.android.com.foxstore.R;
-import foxstore.android.com.foxstore.model.bean.MobMessageError;
+import foxstore.android.com.foxstore.bean.User;
+import foxstore.android.com.foxstore.bean.MobMessageError;
 import foxstore.android.com.foxstore.utils.BmobUtils;
 import foxstore.android.com.foxstore.widgets.CusEditText;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
+
 @Route(path = ActivityKeys.ACTIVITY_REGISTER)
 public class RegistActivity extends BaseFoxStoreActivity {
     private ImageView back;
@@ -188,9 +177,10 @@ public class RegistActivity extends BaseFoxStoreActivity {
 
     private void CreateAccount(String phone,String pwd){
         //调用bmob 创建一个帐号
-        BmobUser user=new BmobUser();
+        User user=new User();
         user.setUsername(phone);
         user.setPassword(pwd);
+        user.setHeadimg("http://bmob-cdn-12859.b0.upaiyun.com/2018/07/20/0c7fc36e400be2e08074d9627340931b.png");//创建帐号的时候给个默认头像
         BmobUtils.insertObject(this, user, new BmobUtils.CallBack() {
             @Override
             public void onSuccess(String s) {

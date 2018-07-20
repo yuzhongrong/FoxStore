@@ -13,7 +13,7 @@ import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
 import foxstore.android.com.common.kes.EventKes;
-import foxstore.android.com.foxstore.model.bean.Order;
+import foxstore.android.com.foxstore.bean.Order;
 import foxstore.android.com.foxstore.tencent_xg.common.NotificationService;
 
 /**垃圾回收模式处理自己的事情（弹出，消失，从数据库删除等操作）*/

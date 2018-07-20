@@ -15,21 +15,29 @@ import com.cjwsc.idcm.Utils.GlideUtil;
 import com.cjwsc.idcm.Utils.RxTimerUtil;
 import com.cjwsc.idcm.Utils.sound.SoundPlayUtils;
 import com.cjwsc.idcm.base.BaseView;
+import com.othershe.library.NiceImageView;
 
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.kes.ActivityKeys;
+import foxstore.android.com.common.kes.IntentKeys;
 import foxstore.android.com.foxstore.R;
+import foxstore.android.com.foxstore.bean.Order;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 @Route(path = ActivityKeys.ACTIVITY_INVITE)
 public class InviteActivity extends BaseFoxStoreActivity {
 
-    @Autowired(name = "image_url")
-    String image_url;
+    @Autowired(name = IntentKeys.DIANPU)
+    String storename;
+
+    @Autowired(name = IntentKeys.HEADIMG)
+    String headimg;
     private ImageView imv;
     private ImageButton cell_close;
     private TextView cell_txt;
     private TextView state_text;
+    private TextView store_name;
+    private NiceImageView imageView;
 
     @Override
     protected int getLayoutId() {
@@ -43,15 +51,20 @@ public class InviteActivity extends BaseFoxStoreActivity {
         cell_close= (ImageButton) $(R.id.cell_close);
         cell_txt=(TextView) $(R.id.cell_txt);
         state_text=(TextView) $(R.id.state_text);
+        store_name=(TextView) $(R.id.name);
+        store_name.setText(storename);
+        imageView=(NiceImageView) $(R.id.head);
+
 
     }
 
     @Override
     protected void onEvent() {
         GlideUtil.loadImageViewWithTransform(this,R.mipmap.bg_blur,new BlurTransformation(10,8),imv);
+        GlideUtil.loadImageView(this,headimg,imageView);
 
         cell_close.setOnClickListener(v->{
-            SoundPlayUtils.play(2); //
+            SoundPlayUtils.play(3); //
            this.finish();
 
         });
@@ -69,5 +82,10 @@ public class InviteActivity extends BaseFoxStoreActivity {
     @Override
     protected BaseView getView() {
         return null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //不处理back
     }
 }

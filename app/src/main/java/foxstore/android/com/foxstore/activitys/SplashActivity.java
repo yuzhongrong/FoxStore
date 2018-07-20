@@ -11,11 +11,11 @@ import com.cjwsc.idcm.Utils.RxTimerUtil;
 import com.cjwsc.idcm.base.BaseActivity;
 import com.cjwsc.idcm.base.BaseView;
 
-import cn.bmob.v3.BmobUser;
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.kes.AcacheKeys;
 import foxstore.android.com.common.kes.ActivityKeys;
 import foxstore.android.com.foxstore.R;
+import foxstore.android.com.foxstore.bean.User;
 
 public class SplashActivity extends BaseActivity {
     @Override
@@ -44,7 +44,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void Arouter2TargetActivity(){
-        BmobUser user= (BmobUser) ACacheUtil.get(SplashActivity.this).getAsObject(AcacheKeys.LOGINBEAN);
+        User user= (User) ACacheUtil.get(SplashActivity.this).getAsObject(AcacheKeys.LOGINBEAN);
         if(user!=null){//登录过的直接进入主页
             ARouter.getInstance().build(ActivityKeys.ACTIVITY_MAIN).navigation();
         }else{//进入登录页
