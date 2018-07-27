@@ -27,7 +27,7 @@ public class DuoDuoAuth2ProviderServicesImpl implements DuoDuoAuth2ProviderServi
     @Override
     public Flowable<String> auth2(ReqAccessTokenParam auth2Param) {
 
-        return HttpUtils.getInstance(BaseApplication.getContext())
+        return HttpUtils.getInstance(mContext)
                 .getRetrofitClient()
                 .setBaseUrl("http://open-api.pinduoduo.com/oauth/token/")
                 .builder(DuoDuoHttpApi.class)

@@ -105,7 +105,7 @@ public class WebViewActivity extends BaseFoxStoreActivity {
                     LogUtil.d("成功获取code");
                     /**请求assets_token*/
                    String code= url.substring(url.indexOf("=")+1);
-                    duoDuoAuth2ProviderServices.auth2(new ReqAccessTokenParam("authorization_code",code))
+                    duoDuoAuth2ProviderServices.auth2(new ReqAccessTokenParam("authorization_code",code,""))
                             .compose(bindToLifecycle())
                             .subscribe(new RxProgressSubscriber<String>(WebViewActivity.this) {
                                 @Override

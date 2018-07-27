@@ -10,8 +10,12 @@ public class ReqAccessTokenParam {
     protected String client_secret="44bd6a7f915c9a15612125f878fbcf2d4e7e29d8";
     protected String redirect_uri="https://www.bmob.cn/";
 
-    public ReqAccessTokenParam(String grant_typ, String code) {
+    protected String refresh_token;
+
+    public ReqAccessTokenParam(String grant_typ, String code,String refresh_token) {
         this.grant_type = grant_typ;
         this.code = code;
+        this.refresh_token=refresh_token;
     }
+
 }
