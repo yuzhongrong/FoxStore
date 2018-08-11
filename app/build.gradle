@@ -34,7 +34,7 @@ android {
         //信鸽推送配置
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'x86','armeabi', 'armeabi-v7a', 'arm64-v8a'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
             manifestPlaceholders = [
                     XG_ACCESS_ID:"2100298336",
@@ -98,12 +98,18 @@ android {
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    compile 'com.tencent.xinge:xinge:3.2.3-release'
+    compile 'com.tencent.wup:wup:1.0.0.E-alpha'
+    compile 'com.tencent.mid:mid:4.0.6-release'
     compile 'cn.bmob.android:http-legacy:1.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     implementation project(':common')
+
+
 
 
 }
