@@ -45,11 +45,12 @@ public class AccessTokenInterceptor implements Interceptor {
             ResponseError responsebean= JsonUtil.toBean(value.toString(),ResponseError.class);
              if(responsebean.getError_response()!=null){
                    if(responsebean.getError_response().getError_code()==100119){//重刷授权
+                       AccessTokenBean  accessTokenBean= JsonUtil.toBean(response.body().string(), AccessTokenBean.class);
+
                        // token失效，重新执行请求
-                       Request newTokenRequest = addParam(oldRequest);//刷新token请求
+                       Request newTokenRequest = addParam(oldRequest,accessTokenBean.getRefresh_token());//刷新token请求
                        response = chain.proceed(newTokenRequest);
                        // 保存刷新后的access_token
-                       AccessTokenBean  accessTokenBean= JsonUtil.toBean(response.body().string(), AccessTokenBean.class);
                        ACacheUtil.get(BaseApplication.getContext()).put(AcacheKeys.Token,accessTokenBean);
                        //再去请求原request
                        response = chain.proceed(oldRequest);
@@ -75,11 +76,11 @@ public class AccessTokenInterceptor implements Interceptor {
      * @param oldRequest
      * @return
      */
-    private Request addParam(Request oldRequest) {
+    private Request addParam(Request oldRequest,String refresh_token) {
 
         HttpUrl.Builder builder = oldRequest.url()
                 .newBuilder()
-                .setEncodedQueryParameter("refresh_token", "4424124fafafsarr3242fa");
+                .setEncodedQueryParameter("refresh_token", refresh_token);
 
         Request newRequest = oldRequest.newBuilder()
                 .method(oldRequest.method(), oldRequest.body())

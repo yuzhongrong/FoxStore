@@ -13,10 +13,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cjwsc.idcm.Utils.GlideUtil;
 import com.cjwsc.idcm.Utils.RxTimerUtil;
+import com.cjwsc.idcm.Utils.ToastUtil;
 import com.cjwsc.idcm.Utils.sound.SoundPlayUtils;
 import com.cjwsc.idcm.base.BaseView;
 import com.othershe.library.NiceImageView;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.kes.ActivityKeys;
 import foxstore.android.com.common.kes.IntentKeys;
@@ -32,6 +35,9 @@ public class InviteActivity extends BaseFoxStoreActivity {
 
     @Autowired(name = IntentKeys.HEADIMG)
     String headimg;
+
+    @Autowired
+    Order order;
     private ImageView imv;
     private ImageButton cell_close;
     private TextView cell_txt;
@@ -65,14 +71,13 @@ public class InviteActivity extends BaseFoxStoreActivity {
 
         cell_close.setOnClickListener(v->{
             SoundPlayUtils.play(3); //
-           this.finish();
+            UpdateOrderState(order);
 
         });
         state_text.setVisibility(View.VISIBLE);
 
         RxTimerUtil.startTime(this,state_text,"正在邀请对方刷单",30,number -> {
-            //倒计时完成关闭页面
-            this.finish();
+            UpdateOrderState(order);
 
         });
 
@@ -88,4 +93,25 @@ public class InviteActivity extends BaseFoxStoreActivity {
     public void onBackPressed() {
         //不处理back
     }
+
+    private void UpdateOrderState(Order order){
+
+        if(order!=null){
+            order.setState(0);
+            order.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if(e==null){
+                        finish();
+                    }else{
+                        ToastUtil.show("服务器开小差了哦！");
+
+                    }
+                }
+            });
+
+        }
+
+    }
+
 }

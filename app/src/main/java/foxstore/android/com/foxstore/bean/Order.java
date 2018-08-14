@@ -1,23 +1,30 @@
 package foxstore.android.com.foxstore.bean;
 
+import android.content.Context;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.facade.service.SerializationService;
+import com.alibaba.fastjson.JSON;
+
 import cn.bmob.v3.BmobObject;
+
+import static foxstore.android.com.common.kes.IntentKeys.ORDER_SERIALIZATION;
 
 /**
  * Created by yuzhongrong on 2018/6/30.
  */
-
-public class Order extends BmobObject {
+public class Order extends BmobObject implements SerializationService{
     String userid;//用户id
     String url;//主图
-    boolean iscan;//是否参团
-    int count;//叠加个数
+    Boolean iscan;//是否参团
+    Integer count;//叠加个数
     String keyword;//关键词
     String storename;//店铺名称
     String price;//单价
 
 
 
-    private String state;//刷单状态 null:空闲，1：刷单
+    private int state;//刷单状态 0:空闲，1：刷单
     private String goods_id;
 
     public Order(String userid,String goods_id, String url, boolean iscan, int count, String keyword, String storename, String price) {
@@ -47,11 +54,11 @@ public class Order extends BmobObject {
         this.url = url;
     }
 
-    public boolean isIscan() {
+    public Boolean isIscan() {
         return iscan;
     }
 
-    public void setIscan(boolean iscan) {
+    public void setIscan(Boolean iscan) {
         this.iscan = iscan;
     }
 
@@ -86,11 +93,26 @@ public class Order extends BmobObject {
     public void setPrice(String price) {
         this.price = price;
     }
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
+    }
+
+    @Override
+    public <T> T json2Object(String json, Class<T> clazz) {
+        return JSON.parseObject(json,clazz);
+    }
+
+    @Override
+    public String object2Json(Object instance) {
+        return JSON.toJSONString(instance);
+    }
+
+    @Override
+    public void init(Context context) {
+
     }
 }

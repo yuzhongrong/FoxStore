@@ -106,12 +106,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-
-    implementation project(':common')
-
-
-
-
+    compile project(path: ':mobchat')
 }
 
 configurations.all {
@@ -135,7 +130,6 @@ configurations.all {
 MobSDK {
     appKey "26a1accc47ec7"
     appSecret "432e3dc2c7176f0c2d68129c17e9ae1b"
-
     SMSSDK {}
 }
 

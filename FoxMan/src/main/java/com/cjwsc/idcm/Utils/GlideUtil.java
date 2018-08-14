@@ -26,6 +26,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.cjwsc.idcm.R;
 
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -81,13 +82,21 @@ public final class GlideUtil extends AppGlideModule {
     }
 
 
-    public static void loadImageViewWithTransform(Context mContext, String path, RoundedCornersTransformation transformation, ImageView mImageView) {
+    public static void loadImageViewWithTransform(Context mContext, String path, BitmapTransformation transformation, ImageView mImageView) {
         GlideApp.with(mContext).load(path).transforms(transformation).into(mImageView);
     }
 
+
+    public static void loadImageViewWithTransformForPlaceholder(Context mContext, String path, BitmapTransformation transformation,int placeholderid, ImageView mImageView) {
+        GlideApp.with(mContext).load(path).placeholder(placeholderid).transforms(transformation).into(mImageView);
+    }
+
+
+
+
     //包含转换器的加载,如圆角
     public static void loadImageViewWithTransform(Context mContext, Integer resid, RoundedCornersTransformation transformation, ImageView mImageView) {
-        GlideApp.with(mContext).load(resid).transforms(transformation).into(mImageView);
+        GlideApp.with(mContext).load(resid).centerCrop().transforms(transformation).into(mImageView);
     }
 
     //包含转换器的加载,如圆角

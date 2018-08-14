@@ -1,6 +1,8 @@
 package foxstore.android.com.foxstore.app;
 import android.content.Context;
 
+import com.android.mobchat.app.FoxChatApplication;
+import com.android.mobchat.glide.SimpleMobIMMessageReceiver;
 import com.cjwsc.idcm.Utils.LogUtil;
 import com.cjwsc.idcm.Utils.TakePhotoUtils;
 import com.cjwsc.idcm.Utils.ToastUtil;
@@ -19,19 +21,25 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobInstallationManager;
 import cn.bmob.v3.InstallationListener;
 import cn.bmob.v3.exception.BmobException;
 import foxstore.android.com.foxstore.R;
+import foxstore.android.com.foxstore.interceptors.AccessTokenInterceptor;
+import okhttp3.Interceptor;
 
 
 /**
  * Created by yuzhongrong on 2018/5/24.
  */
 
-public class FoxStorApplication extends BaseApplication {
+public class FoxStorApplication extends FoxChatApplication {
+
 
 
     //static 代码段可以防止内存泄露
@@ -114,6 +122,15 @@ public class FoxStorApplication extends BaseApplication {
         TakePhotoUtils.init(R.layout.dialog_photo_choose, () -> ToastUtil.show(getString(R.string.permission_deny)));
 
     }
+
+
+    @Override
+    public List<Interceptor> getItercepors() {
+        List<Interceptor> temp = new ArrayList<>();
+        temp.add(new AccessTokenInterceptor());
+        return temp;
+    }
+
 
 
 }

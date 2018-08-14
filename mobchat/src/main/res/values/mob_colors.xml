@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="colorPrimary">@color/c_2a82e4</color>
+    <color name="colorPrimaryDark">@color/c_2a82e4</color>
+    <color name="colorAccent">@color/c_2a82e4</color>
+    <color name="textIcons">@color/c_2a82e4</color>
+
+    <color name="myCustomColor">@color/c_2a82e4</color>
+
+    <color name="percentageFillColor">@color/c_2a82e4</color>
+    <color name="percentageUnfilledColor">#00ffffff</color>
+    <color name="percentageTextBackground">#323a45</color>
+    <color name="percentageTextColor">#ffffff</color>
+
+</resources>

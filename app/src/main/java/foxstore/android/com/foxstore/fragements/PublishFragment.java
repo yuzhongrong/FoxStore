@@ -36,6 +36,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 import foxstore.android.com.common.activitys.BaseFoxStoreActivity;
 import foxstore.android.com.common.fragments.BaseFoxStoreFragment;
 import foxstore.android.com.common.kes.ActivityKeys;
@@ -116,9 +117,9 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
                     }
                     //设置状态
 
-                   if( item.getState()==null){
+                   if( item.getState()==0){
                        state.setVisibility(View.GONE);
-                   }else{
+                   }else if(item.getState()==1){
                        state .setVisibility(View.VISIBLE);
                    }
 
@@ -133,7 +134,7 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
                               //  startActivity(new Intent(getActivity(),InviteActivity.class));
 
                                 //请求前先获取刷单状态判断其是否正在刷单
-                                if(item.getState()==null){//null是空闲状态
+                                if(item.getState()==0){//null是空闲状态
 
                                     //查找Person表里面id为6b6c11c537的数据
                                     BmobQuery<User> bmobQuery = new BmobQuery<User>();
@@ -143,10 +144,27 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
                                         public void done(User object,BmobException e) {
                                             ((BaseFoxStoreActivity)getActivity()).dismissDialog();
                                             if(e==null){
-                                                ARouter.getInstance().build(ActivityKeys.ACTIVITY_INVITE)
-                                                        .withString(IntentKeys.DIANPU,item.getStorename())
-                                                          .withString(IntentKeys.HEADIMG,object.getHeadimg())
-                                                        .navigation(getActivity());
+                                                item.setState(1);
+                                                item.update(item.getObjectId(),new UpdateListener() {
+                                                    @Override
+                                                    public void done(BmobException e) {
+                                                        if(e==null){
+
+                                                            ARouter.getInstance().build(ActivityKeys.ACTIVITY_INVITE)
+                                                                    .withString(IntentKeys.DIANPU,item.getStorename())
+                                                                    .withString(IntentKeys.HEADIMG,object.getHeadimg())
+                                                                    .withObject(IntentKeys.ORDER,item)
+                                                                    .navigation(getActivity());
+                                                        }else{
+                                                            ToastUtil.show("服务器开小差了哦！" );
+
+                                                        }
+
+
+                                                    }
+                                                });
+
+
                                             }else{
                                                 ToastUtil.show("查询用户信息失败：" );
 
@@ -157,7 +175,7 @@ public class PublishFragment extends BaseFoxStoreFragment implements View.OnClic
 
 
 
-                                }else if(item.getState().equals("1")){//忙碌状态
+                                }else if(item.getState()==1){//忙碌状态
                                     popTip();
                                 }
 
